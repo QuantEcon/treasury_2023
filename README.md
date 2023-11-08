@@ -1,7 +1,7 @@
 
 ![](qe-logo-large.png)
 
-# Python and Julia for economic modeling: recent developments and trends
+# Recent trends in scientific computing
 
 This is the homepage for the [QuantEcon](https://quantecon.org/)-IMF seminar on scientific
 and high performance computing to be held in Washington DC in October 2023. 
