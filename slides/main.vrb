@@ -1,15 +1,18 @@
-\frametitle{Phase 3 continued: Python + Numba copy Julia}
 
     \begin{minted}{python}
-from numba import jit
+import jax.numpy as jnp
+from jax import grad, jit
 
-@jit
-def quad(x0, α, n):
-    x = x0
-    for i in range(n-1):
-        x = α * x * (1 - x)
-    return x
+def predict(params, x):
+  for W, b in params:
+    y = W @ x + b
+    x = jnp.tanh(y)
+  return y
 
-quad(0.2, 4.0, 10_000_000)
+def loss(params, x, targets):
+  preds = predict(params, x)
+  return jnp.sum((preds - targets)**2)
+
+grad_loss = jit(grad(loss))
     \end{minted}
 

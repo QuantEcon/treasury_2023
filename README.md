@@ -3,25 +3,18 @@
 
 # Recent trends in scientific computing
 
-This is the homepage for the [QuantEcon](https://quantecon.org/)-IMF seminar on scientific
-and high performance computing to be held in Washington DC in October 2023. 
+* John Stachurski (Australian National University)
 
-Instructor: John Stachurski (Australian National University, Co-founder of QuantEcon)
-
-The languages of instruction will be Python and Julia.  Instruction will draw on,
-but not be limited to, the 
-
-* [QuantEcon Python Programming](https://python-programming.quantecon.org/intro.html) lecture series
-* [QuantEcon Julia Programming](https://julia.quantecon.org/intro.html) lecture series
+This is the homepage for the a workshop on scientific
+computing to be held at the Australian Treasury on 10th November 2023. 
 
 
 ## Topics
 
-* Julia for scientific computing
-* Python for scientific computing
-* Numba, Julia and modern JIT compilers
-* Automatic differentiation, parallelization and GPU computing with JAX
-* Application: Markov chains, time series models and distribution dynamics
+* Brief history of scientific computing
+* Numba and Julia JIT compilers
+* The JAX compiler and XLA
+* Automatic differentiation, parallelization and GPUs
 
 
 

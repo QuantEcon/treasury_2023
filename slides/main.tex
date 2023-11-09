@@ -228,11 +228,15 @@
     \frametitle{Topics}
 
     \begin{itemize}
-        \item Trends in scientific computing
+        \item Traditional compiled languages
         \vspace{0.5em}
-        \item Likely future directions
+        \item Modern JIT compilers
         \vspace{0.5em}
-        \item Python and Julia as MATLAB replacements
+        \item AI-driven scientific computing
+        \vspace{0.5em}
+        \item Where are we heading?
+        \vspace{0.5em}
+        \item Economic applications
     \end{itemize}
 
 \end{frame}
@@ -240,7 +244,7 @@
 
 
 \begin{frame}
-    \frametitle{A (very) short history of scientific computing}
+    \frametitle{A review of some scientific computing environments}
 
 
     General purpose scientific computing environments:
@@ -251,53 +255,89 @@
         \item Fortran \& C / C++ 
         \vspace{0.5em}
         \vspace{0.5em}
-        \item MATLAB \& (Python + NumPy)
+        \item MATLAB ($\approx$ Python + NumPy)
         \vspace{0.5em}
         \vspace{0.5em}
-        \item Julia \& (Python + Numba) 
+        \item Julia ($\approx$ Python + Numba) 
         \vspace{0.5em}
         \vspace{0.5em}
-        \item Python + Google JAX 
+        \item Python + Google JAX ($\approx$ Python + PyTorch)
     \end{enumerate}
 
 \end{frame}
 
 
 
-\begin{frame}[fragile]
+\begin{frame}
     \frametitle{Fortran \& C --- static types and AOT compilers}
 
-    {\small
+
+    \Eg Suppose we want to compute the sequence
+    %
+    \begin{equation*}
+        k_{t+1} = k_t^\alpha + (1 - \delta) k_t
+    \end{equation*}
+    %
+    from some given $k_0$ 
+
+        \vspace{0.5em}
+        \vspace{0.5em}
+        \vspace{0.5em}
+
+    Let's write a function in C that 
+    %
+    \begin{enumerate}
+        \item implements the loop 
+        \vspace{0.5em}
+        \item returns the last $k_t$
+    \end{enumerate}
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+    
     \begin{minted}{c}
 #include <stdio.h>
+#include <math.h>
+
 int main() {
-    int x = 1 + 1;
-    printf("1 + 1 = %d\n", x);
-    return 0;
-}   
-    \end{minted}
+    double k = 0.2;
+    double alpha = 0.4;
+    double delta = 0.1;
+    int i;
+    int n = 1000;
+    for (i = 0; i < n; i++) {
+        k = pow(k, alpha) + (1 - delta) * k;
     }
-
-
-    {\small
-    \begin{minted}{fortran}
-PROGRAM ONE_PLUS_ONE  
-INTEGER :: X = 1 + 1 
-PRINT *, '1 + 1 = ', X
-END PROGRAM ONE_PLUS_ONE 
+    printf("k = %f\n", k);
+}
     \end{minted}
-    }
 
 \end{frame}
 
 
-\begin{frame}
+
+\begin{frame}[fragile]
     
+    \begin{minted}{zsh}
+ϕ john on gz-precision …/treasury_2023 on β main
+❯❯ gcc solow.c -o out -lm
+
+ϕ john on gz-precision …/treasury_2023 on β main
+❯❯ ./out 
+
+x = 46.415888
+    \end{minted}
+
+\end{frame}
+
+\begin{frame}
 
     Pros
 
     \begin{itemize}
-        \item fast  --- on a single thread
+        \item fast 
     \end{itemize}
 
 
@@ -306,7 +346,7 @@ END PROGRAM ONE_PLUS_ONE
     Cons
 
     \begin{itemize}
-        \item tedious to write
+        \item time consuming to write
         \item lack of portability
         \item hard to debug
         \item hard to parallelize
@@ -315,11 +355,79 @@ END PROGRAM ONE_PLUS_ONE
 
 \end{frame}
 
+\begin{frame}[fragile]
+
+
+    For comparison, the same operation in Python:
+    
+    \begin{minted}{python}
+
+α = 0.4
+δ = 0.1
+n = 1_000
+k = 0.2
+
+for i in range(n-1):
+    k = k**α + (1 - δ) * k
+
+print(k)
+
+    \end{minted}
+
+\end{frame}
+
+\begin{frame}
+
+    Pros
+
+    \begin{itemize}
+        \item easy to write
+        \item high portability
+        \item easy to debug
+        \item high interactivity
+    \end{itemize}
+
+    \vspace{0.5em}
+
+    Cons
+
+    \begin{itemize}
+        \item slow
+    \end{itemize}
+
+\end{frame}
 
 
 \begin{frame}
-    \frametitle{Phase 2: MATLAB}
+    
+    So how can we get 
 
+    \begin{center}
+    good execution speeds \navy{and} high productivity / interactivity?
+    \end{center}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+    \frametitle{MATLAB}
+
+    \begin{minted}{matlab}
+        A = [2.0, -1.0
+             5.0, -0.5];
+
+        b = [0.5, 1.0]';
+
+        x = inv(A) * b
+    \end{minted}
+
+
+\end{frame}
+
+
+
+\begin{frame}
     
     \begin{figure}
        \begin{center} % l b r t
@@ -327,16 +435,31 @@ END PROGRAM ONE_PLUS_ONE
        \end{center}
     \end{figure}
 
-
+    
 \end{frame}
 
 
-
-
-\begin{frame}
+\begin{frame}[fragile]
     \frametitle{Phase 2A: Python + NumPy}
 
-    
+
+    \begin{minted}{python}
+        import numpy 
+
+        A = ((2.0, -1.0),
+             (5.0, -0.5))
+
+        b = (0.5, 1.0)
+
+        A, b = np.array(A), np.array(b)
+
+        x = np.inv(A) @ b
+    \end{minted}
+
+\end{frame}
+
+\begin{frame}
+
     \begin{figure}
        \begin{center} % l b r t
         \scalebox{.6}{\includegraphics[trim={2cm 8cm 6cm 3cm},clip]{numpy.pdf}}
@@ -347,25 +470,72 @@ END PROGRAM ONE_PLUS_ONE
 \end{frame}
 
 
-
 \begin{frame}[fragile]
     \frametitle{Phase 3: Julia --- rise of the JIT compilers}
-    
+
+    Can do MATLAB / NumPy style vectorized operations
+
     \begin{minted}{julia}
+A = [2.0  -1.0
+     5.0  -0.5]
 
-function quad(x0, α, n)
-    x = x0
-    for i in 1:(n-1)
-        x = α * x * (1 - x)
-    end
-    return x
-end
+b = [0.5  1.0]'
 
-quad(0.2, 4.0, 10_000_000)
+x = inv(A) * b
     \end{minted}
+    
+\end{frame}
+
+
+\begin{frame}
+    
+    But also has fast loops via an efficient JIT compiler
+
+    \vspace{0.5em}
+    \vspace{0.5em}
+    \Eg Suppose, again, that we want to compute 
+    %
+    \begin{equation*}
+        k_{t+1} = k_t^\alpha + (1 - \delta) k_t
+    \end{equation*}
+    %
+    from some given $k_0$ 
+
+
+    \vspace{0.5em}
+    \vspace{0.5em}
+    \vspace{0.5em}
+    \vspace{0.5em}
+    \begin{itemize}
+        \item Iterative, not easily vectorized
+    \end{itemize}
 
 \end{frame}
 
+
+\begin{frame}[fragile]
+    
+    \begin{minted}{julia}
+
+function solow(k0, α=0.4, δ=0.1, n=1_000)
+    k = k0
+    for i in 1:(n-1)
+        k = k^α + (1 - δ) * k
+    end
+    return k
+end
+
+solow(0.2)
+    \end{minted}
+
+    \vspace{0.5em}
+    \vspace{0.5em}
+    \vspace{0.5em}
+    \vspace{0.5em}
+
+    Julia accelerates \texttt{solow} at runtime via a JIT compiler
+
+\end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Phase 3 continued: Python + Numba copy Julia}
@@ -373,14 +543,14 @@ quad(0.2, 4.0, 10_000_000)
     \begin{minted}{python}
 from numba import jit
 
-@jit
-def quad(x0, α, n):
-    x = x0
+@jit(nopython=True)
+def solow(k0, α=0.4, δ=0.1, n=1_000):
+    k = k0
     for i in range(n-1):
-        x = α * x * (1 - x)
-    return x
+        k = k**α + (1 - δ) * k
+    return k
 
-quad(0.2, 4.0, 10_000_000)
+solow(0.2)
     \end{minted}
 
 \end{frame}
@@ -403,8 +573,9 @@ quad(0.2, 4.0, 10_000_000)
     \begin{itemize}
         \item OpenAI uses PyTorch
         \vspace{0.5em}
-        \item Google Bard, Apple Ajax uses Google JAX
+        \item Google Bard uses Google JAX
         \vspace{0.5em}
+        \item Apple Ajax uses Google JAX
     \end{itemize}
     
 \end{frame}
@@ -428,7 +599,9 @@ quad(0.2, 4.0, 10_000_000)
     %
     \begin{itemize}
         \item $x = $ weather sensor data, $y = $ max temp tomorrow
-        \item $x = $ current distribution of income, $y = $ tax revenue
+    \vspace{0.5em}
+        \item $x = $ income distribution, $y = $ tax revenue
+    \vspace{0.5em}
         \item $x = $ unfinished sentence, $y = $ next word
     \end{itemize}
 
@@ -437,25 +610,27 @@ quad(0.2, 4.0, 10_000_000)
 \begin{frame}
     \frametitle{Training}
 
-    Take data set $(x_i, y_i)_{i=1}^n$ and solve
+    Nonlinear regression: Take data set $(x_i, y_i)_{i=1}^n$ and solve
     %
     \begin{equation*}
         \min_\theta  \ell(\theta) = \sum_{i=1}^n (y_i - \psi_\theta(x_i))^2
         \quad \st \quad \theta \in \Theta
     \end{equation*}
 
-    In the case of ANNs, the function class is all $\psi_\theta$ having the form
+    \vspace{0.5em}
+    In the case of ANNs, we consider all $\psi_\theta$ having the form
     %
     \begin{equation*}
         \psi_\theta
-        = A_{1, \theta} \circ \alpha \circ \cdots \circ A_{k, \theta} \circ \alpha
+        = A_{1} \circ \sigma \circ \cdots \circ A_{k} \circ \sigma
     \end{equation*}
     %
     where
     %
     \begin{itemize}
-        \item $A_{i, \theta}$ is an affine map for $i=1,\ldots,k$ and
-        \item $\alpha$ is a smooth nonlinear vector-valued function
+        \item $A_{i} x = W_{i} x + b_{i} $ is an affine map 
+        \vspace{0.5em}
+        \item $\sigma$ is a nonlinear ``activation'' function
     \end{itemize}
 
 \end{frame}
@@ -464,14 +639,15 @@ quad(0.2, 4.0, 10_000_000)
 \begin{frame}
     
 
-    AI / machine learning: minimizing differentiable loss functions
+    Minimizing a smooth loss functions
     
     \begin{figure}
        \begin{center}
-        \scalebox{0.5}{\includegraphics[trim={2cm 2cm 2cm 3cm},clip]{loss.pdf}}
+        \scalebox{0.15}{\includegraphics[trim={0cm 0cm 0cm 0cm},clip]{gdi.png}}
        \end{center}
     \end{figure}
 
+    Source: \url{https://danielkhv.com/}
 
 \end{frame}
 
@@ -504,13 +680,41 @@ quad(0.2, 4.0, 10_000_000)
 \end{frame}
 
 
+\begin{frame}[fragile]
+    
+    \begin{minted}{python}
+import jax.numpy as jnp
+from jax import grad, jit
+
+def predict(params, x):
+  for W, b in params:
+    y = W @ x + b
+    x = jnp.tanh(y)  
+  return y                
+
+def loss(params, x, targets):
+  preds = predict(params, x)
+  return jnp.sum((preds - targets)**2)
+
+grad_loss = jit(grad(loss))  
+    \end{minted}
+
+\end{frame}
+
+
+\begin{frame}
+    
+    Some trends
+
+\end{frame}
+
 \begin{frame}
 
-    Stack Overflow Trends
+    Stackoverflow Trends
 
     \begin{figure}
        \begin{center}
-        \scalebox{0.25}{\includegraphics{pvr.png}}
+        \scalebox{0.4}{\includegraphics{pvr.png}}
        \end{center}
     \end{figure}
 
@@ -541,7 +745,8 @@ quad(0.2, 4.0, 10_000_000)
     
     Sample code
 
-    \url{https://github.com/QuantEcon/imf_october_2023}
+    \url{https://github.com/QuantEcon/treasury_2023}
+
 \end{frame}
 
 
