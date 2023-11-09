@@ -243,6 +243,15 @@
 
 
 \begin{frame}
+    
+    Sides, code:
+
+    \url{https://github.com/QuantEcon/treasury_2023}
+
+\end{frame}
+
+
+\begin{frame}
 
     Some trends: 
 
@@ -286,7 +295,7 @@
         \vspace{0.5em}
         \vspace{0.5em}
     \begin{enumerate}
-        \item Fortran \& C / C++ 
+        \item Fortran / C / Rust
         \vspace{0.5em}
         \vspace{0.5em}
         \item MATLAB ($\approx$ Python + NumPy)
@@ -303,7 +312,7 @@
 
 
 \begin{frame}
-    \frametitle{Fortran \& C --- static types and AOT compilers}
+    \frametitle{Fortran / C / Rust --- static types and AOT compilers}
 
 
     \Eg Suppose we want to compute the sequence
@@ -600,21 +609,23 @@ solow(0.2)
     Key players
     %
     \begin{itemize}
-        \item TensorFlow, PyTorch 
+        \item OpenAI (ChatGPT, Whisper), Microsoft 
         \vspace{0.5em}
-        \item Google JAX
+        \item Google Research, Google DeepMind
         \vspace{0.5em}
-        \item Mojo?
+        \item Meta
+        \vspace{0.5em}
+        \item Apple?
     \end{itemize}
 
-    \Egs
+    Platforms / libraries
 
     \begin{itemize}
-        \item OpenAI uses PyTorch
+        \item PyTorch (Meta, OpenAI, Stable Diffusion)
         \vspace{0.5em}
-        \item Google Bard uses Google JAX
+        \item Google JAX (Google, Apple Ajax)
         \vspace{0.5em}
-        \item Apple Ajax uses Google JAX
+        \item Tensorflow, Mojo?
     \end{itemize}
     
 \end{frame}
@@ -634,15 +645,44 @@ solow(0.2)
         \item $x$ is the input and $y$ is the output
     \end{itemize}
 
+        \vspace{0.5em}
+        \vspace{0.5em}
+        \vspace{0.5em}
     \Egs
     %
     \begin{itemize}
-        \item $x = $ weather sensor data, $y = $ max temp tomorrow
-    \vspace{0.5em}
-        \item $x = $ income distribution, $y = $ tax revenue next year
-    \vspace{0.5em}
         \item $x = $ unfinished sentence, $y = $ next word
+        \vspace{0.5em}
+        \item $x = $ weather sensor data, $y = $ max temp tomorrow
     \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+
+    Relevant to economics?
+
+    \vspace{0.5em}
+    \vspace{0.5em}
+    
+    ``ECMWF's weather forecasting model is considered the gold standard for
+        medium-term weather forecasting\ldots 
+        Google DeepMind claims
+        in an non-peer-reviewed paper to have beat it 90\% of the time\ldots''
+
+    \vspace{0.5em}
+    \vspace{0.5em}
+
+    ``Traditional forecasting models are big, complex computer algorithms based
+    on atmospheric physics and take hours to run. AI models can create forecasts
+    in just seconds.'' 
+    \vspace{0.5em}
+    \vspace{0.5em}
+
+    $\quad \qquad$$\quad \qquad$ Source: MIT Technology Review  July 2023
+
+
 
 \end{frame}
 
@@ -652,15 +692,15 @@ solow(0.2)
     Nonlinear regression: Take data set $(x_i, y_i)_{i=1}^n$ and solve
     %
     \begin{equation*}
-        \min_\theta  \ell(\theta) = \sum_{i=1}^n (y_i - \psi_\theta(x_i))^2
+        \min_\theta  \ell(\theta) = \sum_{i=1}^n (y_i - f_\theta(x_i))^2
         \quad \st \quad \theta \in \Theta
     \end{equation*}
 
     \vspace{0.5em}
-    In the case of ANNs, we consider all $\psi_\theta$ having the form
+    In the case of ANNs, we consider all $f_\theta$ having the form
     %
     \begin{equation*}
-        \psi_\theta
+        f_\theta
         = \sigma \circ A_{1} \circ \cdots \circ \sigma \circ A_{k} 
     \end{equation*}
     %
@@ -747,7 +787,7 @@ grad_loss = jit(grad(loss))
     
     Sample code
 
-    \url{https://github.com/QuantEcon/treasury_2023}
+    \url{https://github.com/QuantEcon/treasury_2023/notebooks}
 
 \end{frame}
 
