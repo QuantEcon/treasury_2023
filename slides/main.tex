@@ -242,6 +242,40 @@
 \end{frame}
 
 
+\begin{frame}
+
+    Some trends: 
+
+    \begin{figure}
+       \begin{center}
+        \scalebox{0.4}{\includegraphics{pvr.png}}
+       \end{center}
+    \end{figure}
+
+    Source: Stackoverflow Trends
+
+\end{frame}
+
+
+\begin{frame}
+
+    Stack Overflow 2023 Developer Survey (50 languages)
+
+
+    \begin{figure}
+       \begin{center}
+        \scalebox{0.5}{\includegraphics{admired.pdf}}
+       \end{center}
+    \end{figure}
+    
+
+    \hspace*{\fill}--- \url{https://survey.stackoverflow.co/2023/}
+
+
+\end{frame}
+
+
+
 
 \begin{frame}
     \frametitle{A review of some scientific computing environments}
@@ -275,7 +309,7 @@
     \Eg Suppose we want to compute the sequence
     %
     \begin{equation*}
-        k_{t+1} = k_t^\alpha + (1 - \delta) k_t
+        k_{t+1} = s k_t^\alpha + (1 - \delta) k_t
     \end{equation*}
     %
     from some given $k_0$ 
@@ -304,11 +338,12 @@
 int main() {
     double k = 0.2;
     double alpha = 0.4;
+    double s = 0.3;
     double delta = 0.1;
     int i;
     int n = 1000;
     for (i = 0; i < n; i++) {
-        k = pow(k, alpha) + (1 - delta) * k;
+        k = s * pow(k, alpha) + (1 - delta) * k;
     }
     printf("k = %f\n", k);
 }
@@ -327,7 +362,7 @@ int main() {
 ϕ john on gz-precision …/treasury_2023 on β main
 ❯❯ ./out 
 
-x = 46.415888
+x = 6.240251
     \end{minted}
 
 \end{frame}
@@ -363,12 +398,13 @@ x = 46.415888
     \begin{minted}{python}
 
 α = 0.4
+s = 0.3
 δ = 0.1
 n = 1_000
 k = 0.2
 
 for i in range(n-1):
-    k = k**α + (1 - δ) * k
+    k = s * k**α + (1 - δ) * k
 
 print(k)
 
@@ -440,7 +476,7 @@ print(k)
 
 
 \begin{frame}[fragile]
-    \frametitle{Phase 2A: Python + NumPy}
+    \frametitle{Python + NumPy}
 
 
     \begin{minted}{python}
@@ -471,7 +507,7 @@ print(k)
 
 
 \begin{frame}[fragile]
-    \frametitle{Phase 3: Julia --- rise of the JIT compilers}
+    \frametitle{Julia --- rise of the JIT compilers}
 
     Can do MATLAB / NumPy style vectorized operations
 
@@ -496,7 +532,7 @@ x = inv(A) * b
     \Eg Suppose, again, that we want to compute 
     %
     \begin{equation*}
-        k_{t+1} = k_t^\alpha + (1 - \delta) k_t
+        k_{t+1} = s k_t^\alpha + (1 - \delta) k_t
     \end{equation*}
     %
     from some given $k_0$ 
@@ -520,7 +556,7 @@ x = inv(A) * b
 function solow(k0, α=0.4, δ=0.1, n=1_000)
     k = k0
     for i in 1:(n-1)
-        k = k^α + (1 - δ) * k
+        k = s * k^α + (1 - δ) * k
     end
     return k
 end
@@ -538,7 +574,7 @@ solow(0.2)
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{Phase 3 continued: Python + Numba copy Julia}
+    \frametitle{Python + Numba copy Julia}
     
     \begin{minted}{python}
 from numba import jit
@@ -547,16 +583,19 @@ from numba import jit
 def solow(k0, α=0.4, δ=0.1, n=1_000):
     k = k0
     for i in range(n-1):
-        k = k**α + (1 - δ) * k
+        k = s * k**α + (1 - δ) * k
     return k
 
 solow(0.2)
     \end{minted}
 
+
+    Runs at same speed as Julia / C / Fortran
+
 \end{frame}
 
 \begin{frame}
-    \frametitle{Phase 4: AI-driven scientific computing}
+    \frametitle{AI-driven scientific computing}
 
     Key players
     %
@@ -582,7 +621,7 @@ solow(0.2)
 
 
 \begin{frame}
-    \frametitle{Lightning introduction to deep learning}
+    \frametitle{Lightening introduction to deep learning}
     
     Supervised deep learning: find a good approximation to an unknown functional
     relationship
@@ -600,7 +639,7 @@ solow(0.2)
     \begin{itemize}
         \item $x = $ weather sensor data, $y = $ max temp tomorrow
     \vspace{0.5em}
-        \item $x = $ income distribution, $y = $ tax revenue
+        \item $x = $ income distribution, $y = $ tax revenue next year
     \vspace{0.5em}
         \item $x = $ unfinished sentence, $y = $ next word
     \end{itemize}
@@ -622,7 +661,7 @@ solow(0.2)
     %
     \begin{equation*}
         \psi_\theta
-        = A_{1} \circ \sigma \circ \cdots \circ A_{k} \circ \sigma
+        = \sigma \circ A_{1} \circ \cdots \circ \sigma \circ A_{k} 
     \end{equation*}
     %
     where
@@ -688,7 +727,7 @@ from jax import grad, jit
 
 def predict(params, x):
   for W, b in params:
-    y = W @ x + b
+    y = jnp.dot(W, x) + b
     x = jnp.tanh(y)  
   return y                
 
@@ -698,43 +737,6 @@ def loss(params, x, targets):
 
 grad_loss = jit(grad(loss))  
     \end{minted}
-
-\end{frame}
-
-
-\begin{frame}
-    
-    Some trends
-
-\end{frame}
-
-\begin{frame}
-
-    Stackoverflow Trends
-
-    \begin{figure}
-       \begin{center}
-        \scalebox{0.4}{\includegraphics{pvr.png}}
-       \end{center}
-    \end{figure}
-
-\end{frame}
-
-
-\begin{frame}
-
-    Stack Overflow 2023 Developer Survey (50 languages)
-
-
-    \begin{figure}
-       \begin{center}
-        \scalebox{0.5}{\includegraphics{admired.pdf}}
-       \end{center}
-    \end{figure}
-    
-
-    \hspace*{\fill}--- \url{https://survey.stackoverflow.co/2023/}
-
 
 \end{frame}
 

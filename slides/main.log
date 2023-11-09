@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.7)  9 NOV 2023 15:38
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.7)  10 NOV 2023 06:28
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1123,9 +1123,21 @@ LaTeX Font Info:    Trying to load font information for OT1+zplm on input line 2
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 ) [2
 
-] [3
+]
+File: pvr.png Graphic file (type bmp)
+<pvr.png>
+ [3
 
-] [4
+]
+File: admired.pdf Graphic file (type pdf)
+<use admired.pdf>
+LaTeX Font Info:    Font shape `TU/DejaVuSansMono(0)/m/n' will be
+(Font)              scaled to size 8.89018pt on input line 275.
+ [4
+
+] [5
+
+] [6
 
 ]
 \openout4 = `main.vrb'.
@@ -1133,14 +1145,12 @@ File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
  (./main.vrb
 \openout5 = `main.pyg'.
 
- (./_minted-main/friendly.pygstyle) (./_minted-main/44E176F28364CB67F46920E82BD234117EF988268F11F881DC95AE21CB0F31F5.pygtex
-LaTeX Font Info:    Font shape `TU/DejaVuSansMono(0)/m/n' will be
-(Font)              scaled to size 8.89018pt on input line 1.
+ (./_minted-main/friendly.pygstyle) (./_minted-main/7CF139E8B6239015E071FD01100D27957EF988268F11F881DC95AE21CB0F31F5.pygtex
 LaTeX Font Info:    Font shape `TU/DejaVuSansMono(0)/m/it' will be
 (Font)              scaled to size 8.89018pt on input line 2.
 LaTeX Font Info:    Font shape `TU/DejaVuSansMono(0)/b/n' will be
 (Font)              scaled to size 8.89018pt on input line 5.
-)) [5
+)) [7
 
 ]
 \openout4 = `main.vrb'.
@@ -1148,21 +1158,21 @@ LaTeX Font Info:    Font shape `TU/DejaVuSansMono(0)/b/n' will be
  (./main.vrb
 \openout5 = `main.pyg'.
 
- (./_minted-main/3632637EA58D4D55CDF6E63AA9B1A67FC4F191B15FF5E218108B703A0A77446F.pygtex)) [6
-
-] [7
-
-]
-\openout4 = `main.vrb'.
-
- (./main.vrb
-\openout5 = `main.pyg'.
-
- (./_minted-main/4A3C77E9F00597D46A7ABF9418D266924281FAF47C70E7389F15E7D045E0286E.pygtex)) [8
+ (./_minted-main/27D99BE30630BD13CBDDC521A53E81A1C4F191B15FF5E218108B703A0A77446F.pygtex)) [8
 
 ] [9
 
-] [10
+]
+\openout4 = `main.vrb'.
+
+ (./main.vrb
+\openout5 = `main.pyg'.
+
+ (./_minted-main/83908EBA2E3B8002D190F9DC72706D894281FAF47C70E7389F15E7D045E0286E.pygtex)) [10
+
+] [11
+
+] [12
 
 ]
 \openout4 = `main.vrb'.
@@ -1170,24 +1180,11 @@ LaTeX Font Info:    Font shape `TU/DejaVuSansMono(0)/b/n' will be
  (./main.vrb
 \openout5 = `main.pyg'.
 
- (./_minted-main/7533C349454D7187A2FEBB5D1FFA0C0456B72E157953EC1C8AC6970C1887ECFF.pygtex)) [11
+ (./_minted-main/7533C349454D7187A2FEBB5D1FFA0C0456B72E157953EC1C8AC6970C1887ECFF.pygtex)) [13
 
 ]
 File: matlab.pdf Graphic file (type pdf)
 <use matlab.pdf>
- [12
-
-]
-\openout4 = `main.vrb'.
-
- (./main.vrb
-\openout5 = `main.pyg'.
-
- (./_minted-main/4B77CB100DC5D7D8FFEE94762A2DB03D4281FAF47C70E7389F15E7D045E0286E.pygtex)) [13
-
-]
-File: numpy.pdf Graphic file (type pdf)
-<use numpy.pdf>
  [14
 
 ]
@@ -1196,9 +1193,12 @@ File: numpy.pdf Graphic file (type pdf)
  (./main.vrb
 \openout5 = `main.pyg'.
 
- (./_minted-main/15B915BFFD5DACCC5AD9A889A03718298FFA95A9271F21977E7D1C6AA5E5964D.pygtex)) [15
+ (./_minted-main/4B77CB100DC5D7D8FFEE94762A2DB03D4281FAF47C70E7389F15E7D045E0286E.pygtex)) [15
 
-] [16
+]
+File: numpy.pdf Graphic file (type pdf)
+<use numpy.pdf>
+ [16
 
 ]
 \openout4 = `main.vrb'.
@@ -1206,7 +1206,9 @@ File: numpy.pdf Graphic file (type pdf)
  (./main.vrb
 \openout5 = `main.pyg'.
 
- (./_minted-main/ACE5448DA5743FD57CFB6C7CAC5B68FE8FFA95A9271F21977E7D1C6AA5E5964D.pygtex)) [17
+ (./_minted-main/15B915BFFD5DACCC5AD9A889A03718298FFA95A9271F21977E7D1C6AA5E5964D.pygtex)) [17
+
+] [18
 
 ]
 \openout4 = `main.vrb'.
@@ -1214,33 +1216,41 @@ File: numpy.pdf Graphic file (type pdf)
  (./main.vrb
 \openout5 = `main.pyg'.
 
- (./_minted-main/B667217760DF6E88EDE0A82485B0E2794281FAF47C70E7389F15E7D045E0286E.pygtex)) [18
-
-] [19
-
-] [20
+ (./_minted-main/266AD5E2E6687DCA5A238D0779735DBA8FFA95A9271F21977E7D1C6AA5E5964D.pygtex)) [19
 
 ]
-LaTeX Font Info:    Trying to load font information for TU+ppl on input line 636.
-LaTeX Font Info:    No file TUppl.fd. on input line 636.
+\openout4 = `main.vrb'.
+
+ (./main.vrb
+\openout5 = `main.pyg'.
+
+ (./_minted-main/F5161D8F9F3F3B12DE5D074AFF0AC7CE4281FAF47C70E7389F15E7D045E0286E.pygtex)) [20
+
+] [21
+
+] [22
+
+]
+LaTeX Font Info:    Trying to load font information for TU+ppl on input line 675.
+LaTeX Font Info:    No file TUppl.fd. on input line 675.
 
 
 LaTeX Font Warning: Font shape `TU/ppl/m/n' undefined
-(Font)              using `TU/lmr/m/n' instead on input line 636.
+(Font)              using `TU/lmr/m/n' instead on input line 675.
 
-[21
+[23
 
 ]
 File: gdi.png Graphic file (type bmp)
 <gdi.png>
- [22
+ [24
 
 ]
 File: loss2.jpg Graphic file (type bmp)
 <loss2.jpg>
- [23
+ [25
 
-] [24
+] [26
 
 ]
 \openout4 = `main.vrb'.
@@ -1248,21 +1258,9 @@ File: loss2.jpg Graphic file (type bmp)
  (./main.vrb
 \openout5 = `main.pyg'.
 
- (./_minted-main/ADFC5BE6659F871A195763E31783BA294281FAF47C70E7389F15E7D045E0286E.pygtex)) [25
+ (./_minted-main/564368E3869426E78476585AB7196B804281FAF47C70E7389F15E7D045E0286E.pygtex)) [27
 
-] [26
-
-]
-File: pvr.png Graphic file (type bmp)
-<pvr.png>
- [27
-
-]
-File: admired.pdf Graphic file (type pdf)
-<use admired.pdf>
- [28
-
-] [29
+] [28
 
 ]
 \tf@nav=\write8
@@ -1293,12 +1291,12 @@ runsystem(rm main.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 31127 strings out of 475585
- 637625 string characters out of 5773557
+ 31125 strings out of 475585
+ 637609 string characters out of 5773557
  1922422 words of memory out of 5000000
- 51807 multiletter control sequences out of 15000+600000
+ 51805 multiletter control sequences out of 15000+600000
  563890 words of font info for 86 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 128i,15n,123p,417b,570s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 128i,15n,123p,417b,569s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (29 pages).
+Output written on main.pdf (28 pages).
